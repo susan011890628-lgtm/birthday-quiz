@@ -1,0 +1,531 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>測今年生日你最需要哪種能量？</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;500;600;700&family=ZCOOL+XiaoWei&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --rose: #e8a0bf;
+      --blush: #f7d6e0;
+      --lavender: #c9b1ff;
+      --cream: #fff8f5;
+      --soft-gold: #d4a574;
+      --deep-rose: #c45c8a;
+      --text: #5c3a4a;
+      --text-light: #8a6a7a;
+      --card-bg: rgba(255, 255, 255, 0.85);
+      --shadow: 0 20px 60px rgba(196, 92, 138, 0.15);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Serif TC', serif;
+      background: linear-gradient(135deg, #fff0f5 0%, #f5e6ff 40%, #ffeef5 70%, #fff5f0 100%);
+      min-height: 100vh;
+      color: var(--text);
+      overflow-x: hidden;
+      position: relative;
+    }
+
+    .bg-decor {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .petal {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      background: radial-gradient(ellipse at 30% 30%, #ffb6c1, #e8a0bf);
+      border-radius: 50% 0 50% 50%;
+      opacity: 0.35;
+      animation: float 12s ease-in-out infinite;
+    }
+
+    .petal:nth-child(1) { top: 10%; left: 8%; animation-delay: 0s; transform: rotate(20deg); }
+    .petal:nth-child(2) { top: 25%; right: 12%; animation-delay: 2s; width: 14px; height: 14px; }
+    .petal:nth-child(3) { top: 60%; left: 5%; animation-delay: 4s; width: 22px; height: 22px; }
+    .petal:nth-child(4) { top: 75%; right: 8%; animation-delay: 1s; }
+    .petal:nth-child(5) { top: 40%; left: 15%; animation-delay: 3s; width: 12px; height: 12px; }
+    .petal:nth-child(6) { top: 15%; right: 25%; animation-delay: 5s; }
+    .petal:nth-child(7) { bottom: 20%; left: 20%; animation-delay: 2.5s; }
+    .petal:nth-child(8) { bottom: 30%; right: 18%; animation-delay: 6s; width: 16px; height: 16px; }
+
+    @keyframes float {
+      0%, 100% { transform: translateY(0) rotate(0deg); }
+      50% { transform: translateY(-25px) rotate(15deg); }
+    }
+
+    .container {
+      position: relative;
+      z-index: 1;
+      max-width: 520px;
+      margin: 0 auto;
+      padding: 40px 20px 60px;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+    }
+
+    .screen {
+      display: none;
+      animation: fadeIn 0.6s ease;
+    }
+
+    .screen.active {
+      display: block;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .card {
+      background: var(--card-bg);
+      backdrop-filter: blur(12px);
+      border-radius: 28px;
+      padding: 40px 32px;
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(232, 160, 191, 0.3);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .card::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 4px;
+      background: linear-gradient(90deg, var(--rose), var(--lavender), var(--soft-gold));
+    }
+
+    .start-icon {
+      width: 90px;
+      height: 90px;
+      margin: 0 auto 24px;
+      background: linear-gradient(135deg, #ffd6e7, #e8c4ff);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 42px;
+      box-shadow: 0 10px 30px rgba(232, 160, 191, 0.35);
+      animation: pulse 3s ease-in-out infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    h1 {
+      font-family: 'ZCOOL XiaoWei', 'Noto Serif TC', serif;
+      font-size: 1.75rem;
+      font-weight: 400;
+      text-align: center;
+      color: var(--deep-rose);
+      line-height: 1.4;
+      margin-bottom: 12px;
+      letter-spacing: 0.02em;
+    }
+
+    .subtitle {
+      text-align: center;
+      color: var(--text-light);
+      font-size: 0.95rem;
+      margin-bottom: 32px;
+      line-height: 1.6;
+    }
+
+    .btn {
+      display: block;
+      width: 100%;
+      padding: 16px 24px;
+      border: none;
+      border-radius: 50px;
+      font-family: inherit;
+      font-size: 1.05rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-align: center;
+      letter-spacing: 0.05em;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, #e8a0bf 0%, #c45c8a 100%);
+      color: white;
+      box-shadow: 0 8px 24px rgba(196, 92, 138, 0.35);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 32px rgba(196, 92, 138, 0.45);
+    }
+
+    .btn-primary:active {
+      transform: translateY(0);
+    }
+
+    .progress-wrap {
+      margin-bottom: 28px;
+    }
+
+    .progress-text {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.85rem;
+      color: var(--text-light);
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      height: 6px;
+      background: rgba(232, 160, 191, 0.25);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--rose), var(--lavender));
+      border-radius: 10px;
+      transition: width 0.4s ease;
+    }
+
+    .question-num {
+      font-size: 0.85rem;
+      color: var(--deep-rose);
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+      font-weight: 500;
+    }
+
+    .question-text {
+      font-size: 1.2rem;
+      line-height: 1.6;
+      margin-bottom: 28px;
+      color: var(--text);
+      font-weight: 500;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .option {
+      background: rgba(255, 248, 245, 0.9);
+      border: 2px solid rgba(232, 160, 191, 0.35);
+      border-radius: 18px;
+      padding: 18px 20px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      text-align: left;
+      font-size: 0.98rem;
+      line-height: 1.55;
+      color: var(--text);
+      position: relative;
+    }
+
+    .option:hover {
+      border-color: var(--rose);
+      background: rgba(255, 240, 245, 0.95);
+      transform: translateX(4px);
+      box-shadow: 0 6px 20px rgba(232, 160, 191, 0.2);
+    }
+
+    .option.selected {
+      border-color: var(--deep-rose);
+      background: linear-gradient(135deg, rgba(255, 214, 231, 0.6), rgba(232, 196, 255, 0.4));
+      box-shadow: 0 6px 20px rgba(196, 92, 138, 0.2);
+    }
+
+    .option-label {
+      display: inline-block;
+      width: 28px;
+      height: 28px;
+      line-height: 28px;
+      text-align: center;
+      background: linear-gradient(135deg, var(--rose), var(--lavender));
+      color: white;
+      border-radius: 50%;
+      font-size: 0.85rem;
+      font-weight: 600;
+      margin-right: 12px;
+      flex-shrink: 0;
+      vertical-align: middle;
+    }
+
+    .result-icon {
+      width: 100px;
+      height: 100px;
+      margin: 0 auto 20px;
+      background: linear-gradient(135deg, #ffd6e7, #e8c4ff);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 48px;
+      box-shadow: 0 12px 36px rgba(232, 160, 191, 0.4);
+    }
+
+    .result-title {
+      font-family: 'ZCOOL XiaoWei', serif;
+      font-size: 1.5rem;
+      text-align: center;
+      color: var(--deep-rose);
+      margin-bottom: 16px;
+      line-height: 1.4;
+    }
+
+    .result-desc {
+      text-align: center;
+      font-size: 1.02rem;
+      line-height: 1.75;
+      color: var(--text);
+      margin-bottom: 32px;
+      padding: 0 4px;
+    }
+
+    .result-tag {
+      display: inline-block;
+      background: linear-gradient(135deg, rgba(232, 160, 191, 0.25), rgba(201, 177, 255, 0.25));
+      color: var(--deep-rose);
+      padding: 8px 18px;
+      border-radius: 50px;
+      font-size: 0.9rem;
+      margin-bottom: 24px;
+      letter-spacing: 0.03em;
+    }
+
+    .result-center {
+      text-align: center;
+    }
+
+    .restart-btn {
+      background: transparent;
+      border: 2px solid var(--rose);
+      color: var(--deep-rose);
+      margin-top: 8px;
+    }
+
+    .restart-btn:hover {
+      background: rgba(232, 160, 191, 0.15);
+      transform: translateY(-2px);
+    }
+
+    .flourish {
+      position: absolute;
+      font-size: 22px;
+      opacity: 0.4;
+      color: var(--rose);
+    }
+
+    .flourish.tl { top: 16px; left: 18px; }
+    .flourish.tr { top: 16px; right: 18px; }
+    .flourish.bl { bottom: 16px; left: 18px; }
+    .flourish.br { bottom: 16px; right: 18px; }
+
+    @media (max-width: 480px) {
+      .container { padding: 24px 16px 40px; }
+      .card { padding: 32px 22px; }
+      h1 { font-size: 1.5rem; }
+      .question-text { font-size: 1.1rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-decor">
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+    <div class="petal"></div>
+  </div>
+
+  <div class="container">
+    <div id="start-screen" class="screen active">
+      <div class="card">
+        <span class="flourish tl">✦</span>
+        <span class="flourish tr">✦</span>
+        <div class="start-icon">🌙</div>
+        <h1>測今年生日<br>你最需要哪種能量？</h1>
+        <p class="subtitle">閉上眼睛，跟著直覺走完這趟夢境小旅行<br>答案會悄悄告訴你，今年生日真正渴望的是什麼</p>
+        <button class="btn btn-primary" onclick="startQuiz()">開始測驗</button>
+        <span class="flourish bl">♡</span>
+        <span class="flourish br">♡</span>
+      </div>
+    </div>
+
+    <div id="question-screen" class="screen">
+      <div class="card">
+        <div class="progress-wrap">
+          <div class="progress-text">
+            <span id="progress-label">第 1 題</span>
+            <span id="progress-count">1 / 4</span>
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" id="progress-fill" style="width: 25%"></div>
+          </div>
+        </div>
+        <div class="question-num" id="q-num">QUESTION 01</div>
+        <div class="question-text" id="q-text"></div>
+        <div class="options" id="options"></div>
+      </div>
+    </div>
+
+    <div id="result-screen" class="screen">
+      <div class="card">
+        <span class="flourish tl">✦</span>
+        <span class="flourish tr">✦</span>
+        <div class="result-center">
+          <div class="result-icon" id="result-icon">✨</div>
+          <div class="result-tag" id="result-tag"></div>
+          <h2 class="result-title" id="result-title"></h2>
+          <p class="result-desc" id="result-desc"></p>
+          <button class="btn btn-primary" onclick="restartQuiz()">再測一次</button>
+          <button class="btn restart-btn" onclick="restartQuiz()" style="margin-top:12px;">重新開始</button>
+        </div>
+        <span class="flourish bl">♡</span>
+        <span class="flourish br">♡</span>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const questions = [
+      {
+        text: "你做了一個美夢，夢裏有兩條路，你選擇走？",
+        options: [
+          { key: "A", text: "一條古色古香的道路，神秘又充滿冒險！" },
+          { key: "B", text: "一條平常熟悉的街道，走起來毫不費力、舒適慵懶的步道" }
+        ]
+      },
+      {
+        text: "走到一個空地，發現有一張餐桌，餐桌上放的是？",
+        options: [
+          { key: "A", text: "幾道接地氣的小吃，拿在手上隨意邊走邊吃，輕鬆又滿足" },
+          { key: "B", text: "擺設精致優雅的擺盤料理，搭著優雅音樂，一道道細細品嚐的頂級佳餚" }
+        ]
+      },
+      {
+        text: "吃飽喝足後，你發現桌上的美食下面壓著一張地圖，你準備前往？",
+        options: [
+          { key: "A", text: "未知座標，尋找暗號與線索揭開這座村莊的隱藏秘密" },
+          { key: "B", text: "香氛小屋，躺下來讓專人幫你推開全身的疲勞與緊繃" }
+        ]
+      },
+      {
+        text: "經歷了美好一天，你想要？",
+        options: [
+          { key: "A", text: "留在這座風格獨特的村莊過夜，在深夜裡繼續享受平常沒有的特別氛圍。" },
+          { key: "B", text: "踏上溫馨的歸途回到自己舒適的窩，洗個舒服的熱水澡，早早鑽進被窩好好睡一覺。" }
+        ]
+      }
+    ];
+
+    const results = {
+      A: {
+        tag: "離日常遠一點",
+        icon: "🏛️",
+        title: "今年生日你需要的是「離日常遠一點」！",
+        desc: "我們將一起潛入一座充滿歷史與謎團的建築地標，展開一場刺激的深夜探索，並在夜色中享受專屬於我們的特別夜晚！"
+      },
+      B: {
+        tag: "無壓力的極致放鬆",
+        icon: "🥂",
+        title: "今年生日你需要的是「無壓力的極致放鬆」！",
+        desc: "今天你是絕對的主角，準備了讓人食指大動的高級法式料理，以及把疲勞推開的深層按摩，優雅回家享受最舒適的夜晚！"
+      }
+    };
+
+    let currentQ = 0;
+    let scores = { A: 0, B: 0 };
+
+    function startQuiz() {
+      currentQ = 0;
+      scores = { A: 0, B: 0 };
+      showScreen('question-screen');
+      renderQuestion();
+    }
+
+    function showScreen(id) {
+      document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+      document.getElementById(id).classList.add('active');
+    }
+
+    function renderQuestion() {
+      const q = questions[currentQ];
+      document.getElementById('q-num').textContent = `QUESTION ${String(currentQ + 1).padStart(2, '0')}`;
+      document.getElementById('q-text').textContent = q.text;
+      document.getElementById('progress-label').textContent = `第 ${currentQ + 1} 題`;
+      document.getElementById('progress-count').textContent = `${currentQ + 1} / 4`;
+      document.getElementById('progress-fill').style.width = `${((currentQ + 1) / 4) * 100}%`;
+
+      const optionsEl = document.getElementById('options');
+      optionsEl.innerHTML = '';
+      q.options.forEach(opt => {
+        const div = document.createElement('div');
+        div.className = 'option';
+        div.innerHTML = `<span class="option-label">${opt.key}</span>${opt.text}`;
+        div.onclick = () => selectOption(opt.key);
+        optionsEl.appendChild(div);
+      });
+    }
+
+    function selectOption(key) {
+      scores[key]++;
+      const options = document.querySelectorAll('.option');
+      options.forEach(o => {
+        if (o.querySelector('.option-label').textContent === key) {
+          o.classList.add('selected');
+        }
+      });
+
+      setTimeout(() => {
+        currentQ++;
+        if (currentQ < questions.length) {
+          renderQuestion();
+        } else {
+          showResult();
+        }
+      }, 350);
+    }
+
+    function showResult() {
+      const type = scores.A > scores.B ? 'A' : 'B';
+      const r = results[type];
+      document.getElementById('result-icon').textContent = r.icon;
+      document.getElementById('result-tag').textContent = r.tag;
+      document.getElementById('result-title').textContent = r.title;
+      document.getElementById('result-desc').textContent = r.desc;
+      showScreen('result-screen');
+    }
+
+    function restartQuiz() {
+      showScreen('start-screen');
+    }
+  </script>
+</body>
+</html>
