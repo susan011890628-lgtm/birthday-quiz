@@ -514,7 +514,7 @@
     }
 
     function showResult() {
-      const type = scores.A > scores.B ? 'A' : 'B';
+      const type = scores.A >= scores.B ? 'A' : 'B';
       const r = results[type];
       document.getElementById('result-icon').textContent = r.icon;
       document.getElementById('result-tag').textContent = r.tag;
