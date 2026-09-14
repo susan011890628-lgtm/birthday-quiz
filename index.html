@@ -383,10 +383,10 @@
         <div class="progress-wrap">
           <div class="progress-text">
             <span id="progress-label">第 1 題</span>
-            <span id="progress-count">1 / 4</span>
+            <span id="progress-count">1 / 5</span>
           </div>
           <div class="progress-bar">
-            <div class="progress-fill" id="progress-fill" style="width: 25%"></div>
+            <div class="progress-fill" id="progress-fill" style="width: 20%"></div>
           </div>
         </div>
         <div class="question-num" id="q-num">QUESTION 01</div>
@@ -416,17 +416,24 @@
   <script>
     const questions = [
       {
-        text: "你做了一個美夢，夢裏有兩條路，你選擇走？",
+        text: "你最期待的一天到來了，你希望跟小章魚如何度過這一天？",
         options: [
-          { key: "A", text: "一條古色古香的道路，神秘又充滿冒險！" },
-          { key: "B", text: "一條平常熟悉的街道，走起來毫不費力、舒適慵懶的步道" }
+          { key: "A", text: "手牽手探險去！" },
+          { key: "B", text: "手牽手悠閒度過！" }
+        ]
+      },
+      {
+        text: "你跟小章魚一起出門，他會帶領你經過一條路？",
+        options: [
+          { key: "A", text: "一條古色古香的道路" },
+          { key: "B", text: "一條平常熟悉的街道" }
         ]
       },
       {
         text: "走到一個空地，發現有一張餐桌，餐桌上放的是？",
         options: [
-          { key: "A", text: "幾道接地氣的小吃，拿在手上隨意邊走邊吃，輕鬆又滿足" },
-          { key: "B", text: "擺設精致優雅的擺盤料理，搭著優雅音樂，一道道細細品嚐的頂級佳餚" }
+          { key: "A", text: "幾道接地氣的小吃，還有一個手工蛋糕" },
+          { key: "B", text: "擺設精致優雅的擺盤料理，搭著優雅音樂" }
         ]
       },
       {
@@ -447,10 +454,10 @@
 
     const results = {
       A: {
-        tag: "離日常遠一點",
-        icon: "🏛️",
-        title: "今年生日你需要的是「離日常遠一點」！",
-        desc: "我們將一起潛入一座充滿歷史與謎團的建築地標，展開一場刺激的深夜探索，並在夜色中享受專屬於我們的特別夜晚！"
+        tag: "驚喜飯店解謎",
+        icon: "🏨",
+        title: "今年生日你需要的是「驚喜飯店解謎」！",
+        desc: "我們將一起潛入一座充滿謎團與驚喜的飯店，展開一場刺激又甜蜜的解謎冒險，並在夜色中享受專屬於我們的特別夜晚！"
       },
       B: {
         tag: "無壓力的極致放鬆",
@@ -480,8 +487,8 @@
       document.getElementById('q-num').textContent = `QUESTION ${String(currentQ + 1).padStart(2, '0')}`;
       document.getElementById('q-text').textContent = q.text;
       document.getElementById('progress-label').textContent = `第 ${currentQ + 1} 題`;
-      document.getElementById('progress-count').textContent = `${currentQ + 1} / 4`;
-      document.getElementById('progress-fill').style.width = `${((currentQ + 1) / 4) * 100}%`;
+      document.getElementById('progress-count').textContent = `${currentQ + 1} / 5`;
+      document.getElementById('progress-fill').style.width = `${((currentQ + 1) / 5) * 100}%`;
 
       const optionsEl = document.getElementById('options');
       optionsEl.innerHTML = '';
